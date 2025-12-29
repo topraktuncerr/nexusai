@@ -1,0 +1,3815 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS AI - Next Generation Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0a0a1a 100%);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: #00f5ff;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 20s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 26, 0.6);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .nav.scrolled {
+            padding: 16px 48px;
+            background: rgba(10, 10, 26, 0.95);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #00f5ff;
+        }
+        
+        .cta-button {
+            padding: 12px 32px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 2px solid #00f5ff;
+            border-radius: 12px;
+            color: #00f5ff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: rgba(0, 245, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #00f5ff;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #00f5ff 50%, #ff00ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        
+        .hero p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        
+        .primary-button {
+            padding: 18px 48px;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            border: none;
+            border-radius: 14px;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 12px 40px rgba(0, 245, 255, 0.3);
+        }
+        
+        .primary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 60px rgba(0, 245, 255, 0.5);
+        }
+        
+        .secondary-button {
+            padding: 18px 48px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .video-demo {
+            padding: 120px 24px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(10, 10, 26, 0) 0%, rgba(26, 26, 46, 0.5) 100%);
+        }
+        
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 100px rgba(0, 245, 255, 0.3);
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            background: rgba(0, 0, 0, 0.8);
+            transition: all 0.4s ease;
+        }
+        
+        .video-wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 120px rgba(0, 245, 255, 0.5);
+            border-color: rgba(0, 245, 255, 0.6);
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+        
+        .video-features {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .video-feature-item {
+            background: rgba(10, 10, 26, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .video-feature-item:hover {
+            transform: translateX(8px);
+            border-color: rgba(0, 245, 255, 0.5);
+            background: rgba(10, 10, 26, 0.8);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+        
+        .video-feature-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .video-feature-item h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00f5ff;
+            margin-bottom: 8px;
+        }
+        
+        .video-feature-item p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        .features {
+            padding: 120px 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ff00ff;
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        
+        .feature-card {
+            background: rgba(10, 10, 26, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 24px;
+            padding: 48px 36px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 245, 255, 0.5);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 245, 255, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+            display: block;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #00f5ff;
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        
+        /* AUTH SCREEN */
+        #authScreen {
+            display: none;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .auth-container {
+            max-width: 480px;
+            width: 100%;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(40px);
+            padding: 50px 40px;
+            border-radius: 24px;
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 100px rgba(0, 245, 255, 0.2);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .auth-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .auth-header p {
+            font-size: 0.85rem;
+            color: rgba(0, 245, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 32px;
+            background: rgba(0, 20, 40, 0.4);
+            padding: 6px;
+            border-radius: 12px;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .auth-tab.active {
+            background: rgba(0, 245, 255, 0.15);
+            color: #00f5ff;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            border: 1.5px solid rgba(0, 245, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(0, 20, 40, 0.6);
+            color: #ffffff;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: rgba(0, 245, 255, 0.6);
+            background: rgba(0, 20, 40, 0.8);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(0, 245, 255, 0.3);
+        }
+        
+        .auth-button {
+            width: 100%;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 8px 24px rgba(0, 245, 255, 0.3);
+        }
+        
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 245, 255, 0.5);
+        }
+        
+        .auth-message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            display: none;
+        }
+        
+        .auth-message.error {
+            color: #ff4444;
+        }
+        
+        .auth-message.success {
+            color: #00ff88;
+        }
+        
+        .back-to-landing {
+            text-align: center;
+            margin-top: 24px;
+        }
+        
+        .back-to-landing a {
+            color: rgba(0, 245, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .back-to-landing a:hover {
+            color: #00f5ff;
+        }
+        
+        /* MODE SELECTION SCREEN */
+        #modeSelectionScreen {
+            display: none;
+            min-height: 100vh;
+            padding: 120px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        #modeSelectionScreen h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #00f5ff 0%, #ff00ff 50%, #00ff88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+        
+        #modeSelectionScreen .subtitle {
+            font-size: 0.9rem;
+            color: rgba(0, 245, 255, 0.6);
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .mode-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .mode-card {
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .mode-card:hover::before {
+            width: 500px;
+            height: 500px;
+        }
+        
+        .mode-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 245, 255, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 245, 255, 0.3);
+        }
+        
+        .mode-card.kids:hover {
+            border-color: rgba(255, 105, 180, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 105, 180, 0.3);
+        }
+        
+        .mode-card .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .mode-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00f5ff;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .mode-card.kids h3 {
+            color: #ff69b4;
+        }
+        
+        .mode-card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .user-info-top {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(10, 10, 26, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1.5px solid rgba(0, 245, 255, 0.3);
+            font-size: 13px;
+            color: rgba(0, 245, 255, 0.8);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logout-btn-top {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1.5px solid rgba(255, 0, 0, 0.3);
+            color: #ff4444;
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn-top:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.6);
+        }
+        
+        /* MAIN APP SCREEN */
+        #mainScreen {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .main-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #00f5ff 0%, #ff00ff 50%, #00ff88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+        
+        .main-header .subtitle {
+            font-size: 0.9rem;
+            color: rgba(0, 245, 255, 0.6);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        #faceCanvas {
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 245, 255, 0.1);
+            background: rgba(10, 10, 26, 0.6);
+            backdrop-filter: blur(20px);
+            margin: 0 auto;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            display: block;
+        }
+        
+        #faceCanvas:hover {
+            border-color: rgba(0, 245, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .controls {
+            display: flex;
+            gap: 16px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        button {
+            padding: 14px 32px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            background: rgba(0, 245, 255, 0.08);
+            border: 1.5px solid rgba(0, 245, 255, 0.3);
+            border-radius: 12px;
+            color: #00f5ff;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 245, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+        
+        button:hover {
+            background: rgba(0, 245, 255, 0.15);
+            border-color: rgba(0, 245, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        #talkBtn {
+            background: rgba(255, 0, 255, 0.08);
+            border-color: rgba(255, 0, 255, 0.3);
+            color: #ff00ff;
+            font-size: 15px;
+            padding: 16px 40px;
+        }
+        
+        #talkBtn:hover {
+            background: rgba(255, 0, 255, 0.15);
+            border-color: rgba(255, 0, 255, 0.6);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+        }
+        
+        #stopBtn {
+            animation: pulse-red 1s infinite;
+        }
+        
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5); }
+            50% { box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.3); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5); }
+        }
+        
+        #status {
+            margin-top: 32px;
+            font-size: 15px;
+            line-height: 1.7;
+            text-align: center;
+            min-height: 90px;
+            background: rgba(0, 245, 255, 0.04);
+            backdrop-filter: blur(20px);
+            padding: 24px 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 245, 255, 0.15);
+        }
+        
+        .highlight {
+            color: #00f5ff;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+        
+        #historyPanel {
+            display: none;
+            margin-top: 20px;
+            background: rgba(0, 245, 255, 0.05);
+            border: 2px solid #00f5ff;
+            border-radius: 16px;
+            padding: 24px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        #historyPanel::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #historyPanel::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+        
+        #historyPanel::-webkit-scrollbar-thumb {
+            background: rgba(0, 245, 255, 0.5);
+            border-radius: 4px;
+        }
+        
+        #historyPanel::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 245, 255, 0.7);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+        }
+        
+        .history-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 8px;
+            color: rgba(0, 245, 255, 0.7);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active {
+            background: rgba(0, 245, 255, 0.3);
+            color: #00f5ff;
+            border-color: #00f5ff;
+        }
+        
+        .filter-btn:hover {
+            background: rgba(0, 245, 255, 0.2);
+            color: #00f5ff;
+        }
+        
+        .history-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(10, 10, 26, 0.6);
+            border-left: 3px solid;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .history-item:hover {
+            transform: translateX(5px);
+            background: rgba(10, 10, 26, 0.8);
+        }
+        
+        .history-item.user {
+            border-color: #00f5ff;
+        }
+        
+        .history-item.assistant {
+            border-color: #ff00ff;
+        }
+        
+        .history-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+        
+        .history-role {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .history-timestamp {
+            color: #888;
+        }
+        
+        .history-text {
+            color: #fff;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        .history-session {
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .history-session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        
+        .history-session-mode {
+            font-weight: 700;
+            color: #ff00ff;
+            font-size: 13px;
+        }
+        
+        .history-session-date {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        #contactForm input:focus,
+        #contactForm textarea:focus {
+            outline: none;
+            border-color: rgba(0, 245, 255, 0.6);
+            background: rgba(0, 20, 40, 0.8);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+        
+        #contactForm input::placeholder,
+        #contactForm textarea::placeholder {
+            color: rgba(0, 245, 255, 0.3);
+        }
+        
+        #contactForm button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 245, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .nav { padding: 20px 24px; }
+            .nav-links { display: none; }
+            .hero { padding: 100px 24px 60px; }
+            .hero-buttons, .controls { flex-direction: column; width: 100%; }
+            .primary-button, .secondary-button, button { width: 100%; }
+            .features { padding: 80px 24px; }
+            .features-grid, .mode-grid { grid-template-columns: 1fr; }
+            .auth-container { padding: 40px 30px; }
+            #faceCanvas { width: 100% !important; height: auto !important; }
+            .user-info-top {
+                position: static;
+                margin-bottom: 20px;
+                width: calc(100% - 40px);
+            }
+            .video-container {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .video-wrapper {
+                padding-bottom: 56.25%;
+            }
+            #historyPanel {
+                max-height: 400px;
+            }
+            .history-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .history-filters {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particlesContainer"></div>
+
+    <!-- LANDING PAGE -->
+    <div id="landingPage">
+        <nav class="nav" id="navbar">
+            <div class="logo" onclick="scrollToTop()">◈ NEXUS AI</div>
+            <div class="nav-links">
+                <a class="nav-link" onclick="scrollToSection('demo')">Demo</a>
+                <a class="nav-link" onclick="scrollToSection('features')">Features</a>
+                <a class="nav-link" onclick="scrollToSection('about')">About</a>
+                <a class="nav-link" onclick="scrollToSection('contact')">Contact</a>
+                <button class="cta-button" onclick="showAuth()">Get Started</button>
+            </div>
+        </nav>
+        
+        <section class="hero">
+            <div class="hero-badge">✨ Next Generation AI Platform</div>
+            <h1>Intelligence<br>Reimagined</h1>
+            <p>Experience the future of AI interaction with advanced voice recognition, emotional intelligence, and personalized modes for every user.</p>
+            <div class="hero-buttons">
+                <button class="primary-button" onclick="showAuth()">Get Started Free</button>
+                <button class="secondary-button" onclick="scrollToSection('demo')">Watch Demo</button>
+            </div>
+        </section>
+        
+        <section class="video-demo" id="demo">
+            <div class="section-header">
+                <div class="section-badge">🎬 Live Demo</div>
+                <h2 class="section-title">See NEXUS AI in Action</h2>
+                <p class="section-subtitle">Experience the power of next-generation AI interaction</p>
+            </div>
+            
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe 
+                        id="demoVideo"
+                        src="https://player.vimeo.com/video/1150067864?h=7e8c5a3e4f&autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0" 
+                        frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-features">
+                    <div class="video-feature-item">
+                        <span class="video-feature-icon">🎤</span>
+                        <h4>Voice Recognition</h4>
+                        <p>Natural speech-to-text with auto silence detection</p>
+                    </div>
+                    <div class="video-feature-item">
+                        <span class="video-feature-icon">🤖</span>
+                        <h4>AI Avatar</h4>
+                        <p>Upload your photo and talk to your digital twin</p>
+                    </div>
+                    <div class="video-feature-item">
+                        <span class="video-feature-icon">⚡</span>
+                        <h4>Real-time Response</h4>
+                        <p>Lightning-fast AI with emotional intelligence</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features" id="features">
+            <div class="section-header">
+                <div class="section-badge">🚀 Capabilities</div>
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">Everything you need for intelligent AI conversations</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🎤</span>
+                    <h3>Voice Recognition</h3>
+                    <p>Advanced speech-to-text with automatic silence detection. Natural conversations that feel truly human.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🧠</span>
+                    <h3>Emotional Intelligence</h3>
+                    <p>AI that understands and responds to emotions. Empathetic interactions that adapt to your mood.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">👥</span>
+                    <h3>Multiple Modes</h3>
+                    <p>Expert, Casual, and Kids modes. Tailored experiences for every user type and conversation style.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">📸</span>
+                    <h3>Photo Integration</h3>
+                    <p>Upload your photo and talk to your digital avatar. Powered by cutting-edge D-ID technology.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3>Natural Dialogue</h3>
+                    <p>Context-aware conversations with memory. The AI remembers and builds on previous interactions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Real-time Response</h3>
+                    <p>Lightning-fast AI responses with streaming. No waiting, just instant intelligent communication.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features" id="about" style="background: linear-gradient(180deg, rgba(10, 10, 26, 0) 0%, rgba(26, 26, 46, 0.3) 100%);">
+            <div class="section-header">
+                <div class="section-badge">ℹ️ About Us</div>
+                <h2 class="section-title">The Future of AI</h2>
+                <p class="section-subtitle">Built with passion by innovators for innovators</p>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 18px; line-height: 1.8; color: rgba(255, 255, 255, 0.8); margin-bottom: 40px;">
+                    NEXUS AI represents the cutting edge of artificial intelligence technology. We're dedicated to creating 
+                    natural, intuitive, and powerful AI interactions that feel truly human. Our platform combines advanced 
+                    voice recognition, emotional intelligence, and personalized experiences to deliver the next generation 
+                    of AI assistants.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 60px;">
+                    <div style="background: rgba(0, 245, 255, 0.05); padding: 30px; border-radius: 16px; border: 1px solid rgba(0, 245, 255, 0.2);">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">🎯</div>
+                        <h3 style="color: #00f5ff; font-size: 1.3rem; margin-bottom: 10px;">Our Mission</h3>
+                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.95rem;">Make AI accessible and beneficial for everyone, everywhere.</p>
+                    </div>
+                    
+                    <div style="background: rgba(255, 0, 255, 0.05); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 0, 255, 0.2);">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">💡</div>
+                        <h3 style="color: #ff00ff; font-size: 1.3rem; margin-bottom: 10px;">Our Vision</h3>
+                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.95rem;">A world where AI enhances human potential without boundaries.</p>
+                    </div>
+                    
+                    <div style="background: rgba(0, 255, 136, 0.05); padding: 30px; border-radius: 16px; border: 1px solid rgba(0, 255, 136, 0.2);">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">🌟</div>
+                        <h3 style="color: #00ff88; font-size: 1.3rem; margin-bottom: 10px;">Our Values</h3>
+                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.95rem;">Innovation, transparency, and user-centric design at our core.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features" id="contact" style="padding-bottom: 120px;">
+            <div class="section-header">
+                <div class="section-badge">📧 Get In Touch</div>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">We'd love to hear from you</p>
+            </div>
+            
+            <div style="max-width: 600px; margin: 0 auto;">
+                <form id="contactForm" style="background: rgba(10, 10, 26, 0.6); backdrop-filter: blur(20px); padding: 40px; border-radius: 24px; border: 1px solid rgba(0, 245, 255, 0.2);" onsubmit="handleContactSubmit(event)">
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; color: rgba(255, 255, 255, 0.8); font-size: 14px; font-weight: 500; margin-bottom: 8px;">Name</label>
+                        <input type="text" required style="width: 100%; padding: 14px; background: rgba(0, 20, 40, 0.6); border: 1.5px solid rgba(0, 245, 255, 0.3); border-radius: 12px; color: #ffffff; font-size: 14px; font-family: 'Inter', sans-serif;" placeholder="Your name">
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; color: rgba(255, 255, 255, 0.8); font-size: 14px; font-weight: 500; margin-bottom: 8px;">Email</label>
+                        <input type="email" required style="width: 100%; padding: 14px; background: rgba(0, 20, 40, 0.6); border: 1.5px solid rgba(0, 245, 255, 0.3); border-radius: 12px; color: #ffffff; font-size: 14px; font-family: 'Inter', sans-serif;" placeholder="your@email.com">
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; color: rgba(255, 255, 255, 0.8); font-size: 14px; font-weight: 500; margin-bottom: 8px;">Message</label>
+                        <textarea required rows="5" style="width: 100%; padding: 14px; background: rgba(0, 20, 40, 0.6); border: 1.5px solid rgba(0, 245, 255, 0.3); border-radius: 12px; color: #ffffff; font-size: 14px; font-family: 'Inter', sans-serif; resize: vertical;" placeholder="Your message..."></textarea>
+                    </div>
+                    
+                    <button type="submit" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #00f5ff, #ff00ff); border: none; border-radius: 12px; color: #ffffff; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 24px rgba(0, 245, 255, 0.3);">
+                        Send Message
+                    </button>
+                    
+                    <div id="contactMessage" style="margin-top: 20px; text-align: center; font-size: 14px; display: none;"></div>
+                </form>
+                
+                <div style="margin-top: 60px; text-align: center;">
+                    <h3 style="color: #00f5ff; font-size: 1.5rem; margin-bottom: 25px;">Other Ways to Reach Us</h3>
+                    <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
+                        <a href="mailto:info@nexusai.com" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">
+                            <div style="font-size: 2rem; margin-bottom: 8px;">📧</div>
+                            <div>info@nexusai.com</div>
+                        </a>
+                        <a href="https://twitter.com/nexusai" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">
+                            <div style="font-size: 2rem; margin-bottom: 8px;">🐦</div>
+                            <div>@nexusai</div>
+                        </a>
+                        <a href="https://github.com/nexusai" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">
+                            <div style="font-size: 2rem; margin-bottom: 8px;">💻</div>
+                            <div>GitHub</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- AUTH SCREEN -->
+    <div id="authScreen">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>◈ NEXUS AI ◈</h1>
+                <p>Holographic Interface v3.0</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+            
+            <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label>USERNAME OR EMAIL</label>
+                    <input type="text" id="loginUsername" placeholder="Enter your username or email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>PASSWORD</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="auth-button">Login</button>
+                <div class="auth-message" id="loginMessage"></div>
+            </form>
+            
+            <form class="auth-form" id="signupForm" onsubmit="handleSignup(event)">
+                <div class="input-group">
+                    <label>EMAIL</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>USERNAME</label>
+                    <input type="text" id="signupUsername" placeholder="Choose a username" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>PASSWORD</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required minlength="6">
+                </div>
+                
+                <button type="submit" class="auth-button">Create Account</button>
+                <div class="auth-message" id="signupMessage"></div>
+            </form>
+            
+            <div class="back-to-landing">
+                <a href="#" onclick="backToLanding(); return false;">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODE SELECTION SCREEN -->
+    <div id="modeSelectionScreen">
+        <div class="user-info-top" id="userInfoTop">
+            👤 <span id="currentUserName"></span>
+            <button class="logout-btn-top" onclick="handleLogout()">LOGOUT</button>
+        </div>
+        
+        <h1>◈ SELECT MODE ◈</h1>
+        <div class="subtitle">Choose Your Experience</div>
+        
+        <div class="mode-grid">
+            <div class="mode-card" onclick="selectMode('expert')">
+                <div class="icon">🎯</div>
+                <h3>EXPERT MODE</h3>
+                <p>Professional, technical and detailed responses. Ideal for business and technical topics.</p>
+            </div>
+            
+            <div class="mode-card" onclick="selectMode('casual')">
+                <div class="icon">😎</div>
+                <h3>CASUAL MODE</h3>
+                <p>Friendly, relaxed and conversational style. Perfect for casual chat.</p>
+            </div>
+            
+            <div class="mode-card kids" onclick="selectMode('kids')">
+                <div class="icon">🧸</div>
+                <h3>KIDS MODE</h3>
+                <p>Simple, educational and safe. Specially designed for children.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCREEN -->
+    <div id="mainScreen">
+        <div class="user-info-top" id="userInfoMain" style="display: none;">
+            👤 <span id="currentUserNameMain"></span>
+            <button class="logout-btn-top" onclick="handleLogout()">LOGOUT</button>
+        </div>
+        
+        <div class="main-header">
+            <h1 id="mainTitle">◈ NEXUS AI ◈</h1>
+            <div class="subtitle" id="mainSubtitle">HOLOGRAPHIC INTERFACE v3.0</div>
+        </div>
+        
+        <canvas id="faceCanvas" width="800" height="600"></canvas>
+        
+        <div class="controls">
+            <button id="talkBtn" onclick="toggleTalk()">🎤 VOICE INPUT</button>
+            <button id="stopBtn" onclick="stopSpeaking()" style="background: rgba(255, 0, 0, 0.15); border-color: rgba(255, 0, 0, 0.5); color: #ff4444;">🛑 STOP</button>
+            <button onclick="toggleHistory()">📜 HISTORY</button>
+            <button onclick="document.getElementById('photoInput').click()">📷 PHOTO</button>
+            <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+            <button id="resetFaceBtn" onclick="resetToRobot()" style="display: none;">🤖 RESET</button>
+            <button onclick="backToModeSelection()">⬅ CHANGE MODE</button>
+        </div>
+        
+        <div id="status">Initializing...</div>
+        
+        <div id="historyPanel">
+            <div class="history-header">
+                <h3 style="color: #00f5ff; margin: 0;">📜 CONVERSATION HISTORY</h3>
+                <button onclick="clearHistory()" style="padding: 6px 12px; font-size: 11px; background: rgba(255, 0, 0, 0.1); border-color: rgba(255, 0, 0, 0.3); color: #ff4444;">Clear All</button>
+            </div>
+            <div class="history-filters">
+                <button class="filter-btn active" onclick="filterHistory('all')">All</button>
+                <button class="filter-btn" onclick="filterHistory('current')">Current Session</button>
+                <button class="filter-btn" onclick="filterHistory('previous')">Previous Sessions</button>
+            </div>
+            <div id="historyContent"></div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script>
+        console.log('🚀 Starting NEXUS AI...');
+        
+        // 🔥 FIREBASE CONFIGURATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyAcKTnT33Uc0SkZstkX-i9JTgeIXZ6JPQw",
+            authDomain: "nexus-d4a38.firebaseapp.com",
+            projectId: "nexus-d4a38",
+            storageBucket: "nexus-d4a38.firebasestorage.app",
+            messagingSenderId: "284014543880",
+            appId: "1:284014543880:web:2207439abb06820676fdbd",
+            measurementId: "G-H9FMD4ZQMX"
+        };
+        
+        // Firebase'i başlat
+        let firebaseInitialized = false;
+        let auth = null;
+        let db = null;
+        
+        try {
+            firebase.initializeApp(firebaseConfig);
+            auth = firebase.auth();
+            db = firebase.firestore();
+            firebaseInitialized = true;
+            console.log('✅ Firebase initialized successfully!');
+        } catch (error) {
+            console.warn('⚠️ Firebase not configured. Using localStorage fallback.');
+            console.log('👉 To enable Firebase: Add your config above');
+        }
+        
+        // Canvas roundRect polyfill
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                if (w < 2 * r) r = w / 2;
+                if (h < 2 * r) r = h / 2;
+                this.beginPath();
+                this.moveTo(x + r, y);
+                this.arcTo(x + w, y, x + w, y + h, r);
+                this.arcTo(x + w, y + h, x, y + h, r);
+                this.arcTo(x, y + h, x, y, r);
+                this.arcTo(x, y, x + w, y, r);
+                this.closePath();
+                return this;
+            };
+        }
+        
+        // GLOBAL VARIABLES
+        let currentUsername = '';
+        let currentMode = 'expert';
+        let conversationHistory = [];
+        let listening = false;
+        let mediaRecorder = null;
+        let currentConversationEmotion = 'neutral';
+        let emotionConfidence = 0;
+        
+        // Canvas
+        const canvas = document.getElementById('faceCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let emotion = 'neutral';
+        let time = 0;
+        let speaking = false;
+        let mouthOpen = 0;
+        let jawY = 0;
+        let eyebrowY = -10;
+        let eyeOpen = 1;
+        let bearEyeOpen = 1;
+        
+        // Audio
+        let currentAudio = null;
+        let shouldStopSpeaking = false;
+        
+        // Photo mode
+        let photoMode = false;
+        let uploadedPhoto = null;
+        let detectedGender = 'male';
+        let didImageUrl = null;
+        let peerConnection = null;
+        let streamId = null;
+        let sessionId = null;
+        let didStreamReady = false;
+        let talkVideoElement = null;
+        let frozenFrame = null;
+        
+        // APIs
+        const EMBEDDED_API_KEY = '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';
+        const DID_API_KEY = 'dG9wcmFrdHVuY2VyMEBnbWFpbC5jb20:-OIO95H8RMJWPNU8SPu97';
+        
+        // Voice recording
+        let audioContext = null;
+        let analyser = null;
+        let silenceStart = null;
+        let checkingAudio = false;
+        const SILENCE_THRESHOLD = 0.018;
+        const SILENCE_DURATION = 1150;
+        const MIN_RECORDING_TIME = 500;
+        let recordingStartTime = null;
+        
+        // Face-API
+        const faceApiScript = document.createElement('script');
+        faceApiScript.src = 'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js';
+        document.head.appendChild(faceApiScript);
+        let faceApiLoaded = false;
+        
+        faceApiScript.onload = async () => {
+            try {
+                await faceapi.nets.tinyFaceDetector.loadFromUri('https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/');
+                await faceapi.nets.faceLandmark68Net.loadFromUri('https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/');
+                await faceapi.nets.ageGenderNet.loadFromUri('https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/');
+                faceApiLoaded = true;
+                console.log('Face-API loaded!');
+            } catch (e) {
+                console.error('Face-API error:', e);
+            }
+        };
+        
+        // USER DATABASE
+        function getUsers() {
+            if (!firebaseInitialized) {
+                return JSON.parse(localStorage.getItem('nexus_users') || '[]');
+            }
+            return []; // Firebase kullanıyorsak local storage'a gerek yok
+        }
+        
+        function saveUser(user) {
+            if (!firebaseInitialized) {
+                const users = getUsers();
+                users.push(user);
+                localStorage.setItem('nexus_users', JSON.stringify(users));
+            }
+        }
+        
+        async function getCurrentUser() {
+            if (firebaseInitialized) {
+                return new Promise((resolve) => {
+                    auth.onAuthStateChanged((user) => {
+                        resolve(user);
+                    });
+                });
+            } else {
+                const userStr = localStorage.getItem('nexus_current_user');
+                return userStr ? JSON.parse(userStr) : null;
+            }
+        }
+        
+        // PARTICLES
+        function createParticles() {
+            const container = document.getElementById('particlesContainer');
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.width = Math.random() * 4 + 2 + 'px';
+                p.style.height = p.style.width;
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 20 + 's';
+                p.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(p);
+            }
+        }
+        
+        // NAVIGATION
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const msgEl = document.getElementById('contactMessage');
+            
+            const formData = {
+                name: e.target[0].value,
+                email: e.target[1].value,
+                message: e.target[2].value,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (firebaseInitialized) {
+                msgEl.textContent = '🔄 Sending message...';
+                msgEl.style.color = '#00f5ff';
+                msgEl.style.display = 'block';
+                
+                db.collection('contact_messages').add(formData)
+                    .then(() => {
+                        msgEl.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
+                        msgEl.style.color = '#00ff88';
+                        e.target.reset();
+                        
+                        setTimeout(() => {
+                            msgEl.style.display = 'none';
+                        }, 5000);
+                    })
+                    .catch((error) => {
+                        msgEl.textContent = '✗ Error sending message. Please try again.';
+                        msgEl.style.color = '#ff4444';
+                        console.error('Contact form error:', error);
+                    });
+            } else {
+                // LocalStorage fallback
+                const messages = JSON.parse(localStorage.getItem('contact_messages') || '[]');
+                messages.push(formData);
+                localStorage.setItem('contact_messages', JSON.stringify(messages));
+                
+                msgEl.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
+                msgEl.style.color = '#00ff88';
+                msgEl.style.display = 'block';
+                e.target.reset();
+                
+                setTimeout(() => {
+                    msgEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+        
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
+        // AUTH
+        function showAuth() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('authScreen').style.display = 'flex';
+        }
+        
+        function backToLanding() {
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('landingPage').style.display = 'block';
+        }
+        
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            forms.forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                tabs[0].classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('signupForm').classList.add('active');
+            }
+            
+            document.getElementById('loginMessage').style.display = 'none';
+            document.getElementById('signupMessage').style.display = 'none';
+        }
+        
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const msgEl = document.getElementById('loginMessage');
+            
+            if (firebaseInitialized) {
+                // Firebase Authentication
+                msgEl.textContent = '🔄 Logging in...';
+                msgEl.className = 'auth-message';
+                msgEl.style.display = 'block';
+                msgEl.style.color = '#00f5ff';
+                
+                auth.signInWithEmailAndPassword(username, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        msgEl.textContent = '✓ Login successful!';
+                        msgEl.className = 'auth-message success';
+                        
+                        setTimeout(() => showModeSelection({ 
+                            email: user.email, 
+                            username: user.email.split('@')[0],
+                            uid: user.uid 
+                        }), 800);
+                    })
+                    .catch((error) => {
+                        msgEl.textContent = '✗ ' + (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' 
+                            ? 'Invalid email or password' 
+                            : error.message);
+                        msgEl.className = 'auth-message error';
+                    });
+            } else {
+                // LocalStorage fallback
+                const users = getUsers();
+                const user = users.find(u => 
+                    (u.username === username || u.email === username) && u.password === password
+                );
+                
+                if (user) {
+                    msgEl.textContent = '✓ Login successful!';
+                    msgEl.className = 'auth-message success';
+                    msgEl.style.display = 'block';
+                    
+                    localStorage.setItem('nexus_current_user', JSON.stringify(user));
+                    
+                    setTimeout(() => showModeSelection(user), 800);
+                } else {
+                    msgEl.textContent = '✗ Invalid username or password';
+                    msgEl.className = 'auth-message error';
+                    msgEl.style.display = 'block';
+                }
+            }
+        }
+        
+        function handleSignup(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('signupEmail').value.trim();
+            const username = document.getElementById('signupUsername').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const msgEl = document.getElementById('signupMessage');
+            
+            if (firebaseInitialized) {
+                // Firebase Authentication
+                msgEl.textContent = '🔄 Creating account...';
+                msgEl.className = 'auth-message';
+                msgEl.style.display = 'block';
+                msgEl.style.color = '#00f5ff';
+                
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        
+                        // Kullanıcı bilgilerini Firestore'a kaydet
+                        return db.collection('users').doc(user.uid).set({
+                            email: email,
+                            username: username,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => user);
+                    })
+                    .then((user) => {
+                        msgEl.textContent = '✓ Account created successfully!';
+                        msgEl.className = 'auth-message success';
+                        
+                        setTimeout(() => {
+                            switchTab('login');
+                            document.getElementById('loginUsername').value = email;
+                            msgEl.style.display = 'none';
+                        }, 1500);
+                    })
+                    .catch((error) => {
+                        let errorMsg = 'Error creating account';
+                        if (error.code === 'auth/email-already-in-use') {
+                            errorMsg = 'Email already registered';
+                        } else if (error.code === 'auth/weak-password') {
+                            errorMsg = 'Password should be at least 6 characters';
+                        } else if (error.code === 'auth/invalid-email') {
+                            errorMsg = 'Invalid email address';
+                        }
+                        msgEl.textContent = '✗ ' + errorMsg;
+                        msgEl.className = 'auth-message error';
+                    });
+            } else {
+                // LocalStorage fallback
+                const users = getUsers();
+                
+                if (users.some(u => u.email === email)) {
+                    msgEl.textContent = '✗ Email already registered';
+                    msgEl.className = 'auth-message error';
+                    msgEl.style.display = 'block';
+                    return;
+                }
+                
+                if (users.some(u => u.username === username)) {
+                    msgEl.textContent = '✗ Username already taken';
+                    msgEl.className = 'auth-message error';
+                    msgEl.style.display = 'block';
+                    return;
+                }
+                
+                const newUser = { email, username, password, createdAt: new Date().toISOString() };
+                saveUser(newUser);
+                
+                msgEl.textContent = '✓ Account created successfully!';
+                msgEl.className = 'auth-message success';
+                msgEl.style.display = 'block';
+                
+                setTimeout(() => {
+                    switchTab('login');
+                    document.getElementById('loginUsername').value = username;
+                    msgEl.style.display = 'none';
+                }, 1500);
+            }
+        }
+        
+        function showModeSelection(user) {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('modeSelectionScreen').style.display = 'block';
+            
+            const userInfoTop = document.getElementById('userInfoTop');
+            userInfoTop.style.display = 'flex';
+            document.getElementById('currentUserName').textContent = user.username || user.email.split('@')[0];
+        }
+        
+        async function saveConversationHistory(mode, history) {
+            if (!history || history.length === 0) {
+                console.log('⚠️ No history to save');
+                return;
+            }
+            
+            if (!firebaseInitialized) {
+                // LocalStorage fallback - kullanıcı özel
+                const user = JSON.parse(localStorage.getItem('nexus_current_user'));
+                if (!user) return;
+                
+                const key = `conversations_${user.email}_${mode}`;
+                const conversations = JSON.parse(localStorage.getItem(key) || '[]');
+                
+                // Son conversation'ı güncelle veya yeni ekle
+                if (conversations.length > 0) {
+                    conversations[conversations.length - 1] = {
+                        userId: user.email,
+                        mode: mode,
+                        history: history,
+                        timestamp: new Date().toISOString()
+                    };
+                } else {
+                    conversations.push({
+                        userId: user.email,
+                        mode: mode,
+                        history: history,
+                        timestamp: new Date().toISOString()
+                    });
+                }
+                
+                localStorage.setItem(key, JSON.stringify(conversations));
+                console.log('✅ Saved', history.length, 'messages to localStorage');
+                return;
+            }
+            
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            try {
+                // Önce mevcut conversation'ı kontrol et
+                const snapshot = await db.collection('conversations')
+                    .where('userId', '==', user.uid)
+                    .where('mode', '==', mode)
+                    .orderBy('timestamp', 'desc')
+                    .limit(1)
+                    .get();
+                
+                if (!snapshot.empty) {
+                    // Mevcut conversation'ı güncelle
+                    const docId = snapshot.docs[0].id;
+                    await db.collection('conversations').doc(docId).update({
+                        history: history,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    console.log('✅ Updated', history.length, 'messages in Firebase for user:', user.email);
+                } else {
+                    // Yeni conversation ekle
+                    await db.collection('conversations').add({
+                        userId: user.uid,
+                        userEmail: user.email,
+                        mode: mode,
+                        history: history,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    console.log('✅ Saved', history.length, 'messages to Firebase for user:', user.email);
+                }
+            } catch (error) {
+                console.error('Error saving conversation:', error);
+            }
+        }
+        
+        async function loadConversationHistory(mode) {
+            if (!firebaseInitialized) {
+                // LocalStorage fallback - kullanıcı özel
+                const user = JSON.parse(localStorage.getItem('nexus_current_user'));
+                if (!user) return [];
+                
+                const key = `conversations_${user.email}_${mode}`;
+                const conversations = JSON.parse(localStorage.getItem(key) || '[]');
+                
+                if (conversations.length > 0) {
+                    const latest = conversations[conversations.length - 1];
+                    console.log('✅ Loaded', latest.history.length, 'messages from localStorage for:', user.email);
+                    return latest.history || [];
+                }
+                return [];
+            }
+            
+            const user = auth.currentUser;
+            if (!user) return [];
+            
+            try {
+                const snapshot = await db.collection('conversations')
+                    .where('userId', '==', user.uid)
+                    .where('mode', '==', mode)
+                    .orderBy('timestamp', 'desc')
+                    .limit(1)
+                    .get();
+                
+                if (!snapshot.empty) {
+                    const data = snapshot.docs[0].data();
+                    console.log('✅ Loaded', data.history?.length || 0, 'messages from Firebase for user:', user.email);
+                    return data.history || [];
+                }
+            } catch (error) {
+                console.error('Error loading conversation:', error);
+            }
+            
+            return [];
+        }
+        
+        async function selectMode(mode) {
+            currentMode = mode;
+            
+            let user;
+            if (firebaseInitialized) {
+                user = auth.currentUser;
+                if (!user) {
+                    alert('Session expired. Please login again.');
+                    backToLanding();
+                    return;
+                }
+            } else {
+                user = JSON.parse(localStorage.getItem('nexus_current_user'));
+            }
+            
+            document.getElementById('modeSelectionScreen').style.display = 'none';
+            document.getElementById('mainScreen').style.display = 'block';
+            
+            const userInfoMain = document.getElementById('userInfoMain');
+            userInfoMain.style.display = 'flex';
+            document.getElementById('currentUserNameMain').textContent = user.username || user.email?.split('@')[0] || 'User';
+            
+            const mainTitle = document.getElementById('mainTitle');
+            const mainSubtitle = document.getElementById('mainSubtitle');
+            const status = document.getElementById('status');
+            
+            if (mode === 'kids') {
+                mainTitle.textContent = '🧸 PATI AYICIK 🧸';
+                mainSubtitle.textContent = 'KIDS MODE - EDUCATIONAL & SAFE';
+                status.innerHTML = '<span class="highlight" style="color: #ff69b4;">✓ KIDS MODE ACTIVE</span><br>Hello! Ready to learn and play? 🌟';
+            } else if (mode === 'casual') {
+                mainTitle.textContent = '◈ NEXUS AI ◈';
+                mainSubtitle.textContent = 'CASUAL MODE - FRIENDLY CHAT';
+                status.innerHTML = '<span class="highlight">😎 CASUAL MODE ACTIVE</span><br>Hey! Let\'s have a relaxed conversation!';
+            } else {
+                mainTitle.textContent = '◈ NEXUS AI ◈';
+                mainSubtitle.textContent = 'EXPERT MODE - PROFESSIONAL';
+                status.innerHTML = '<span class="highlight">🎯 EXPERT MODE ACTIVE</span><br>Professional AI assistant ready. How can I help you?';
+            }
+            
+            currentConversationEmotion = 'neutral';
+            emotion = 'neutral';
+            photoMode = false;
+            uploadedPhoto = null;
+            
+            // Conversation history yükle
+            const history = await loadConversationHistory(mode);
+            if (history.length > 0) {
+                conversationHistory = history;
+                status.innerHTML += '<br><span style="color: #00ff88;">✓ Previous conversation loaded (' + history.length + ' messages)</span>';
+            } else {
+                conversationHistory = [];
+            }
+            
+            const canvas = document.getElementById('faceCanvas');
+            if (window.innerWidth < 768) {
+                canvas.width = window.innerWidth - 40;
+                canvas.height = (window.innerWidth - 40) * 0.75;
+            }
+            
+            if (canvas && ctx) {
+                animate();
+                setTimeout(() => {
+                    if (currentMode === 'kids') bearBlink();
+                    else blink();
+                }, 2000);
+            }
+        }
+        
+        async function backToModeSelection() {
+            // Conversation history'yi kaydet
+            if (firebaseInitialized && conversationHistory.length > 0) {
+                await saveConversationHistory(currentMode, conversationHistory);
+            }
+            
+            let user;
+            if (firebaseInitialized) {
+                user = auth.currentUser;
+            } else {
+                user = JSON.parse(localStorage.getItem('nexus_current_user'));
+            }
+            
+            document.getElementById('mainScreen').style.display = 'none';
+            document.getElementById('userInfoMain').style.display = 'none';
+            document.getElementById('modeSelectionScreen').style.display = 'block';
+            
+            const userInfoTop = document.getElementById('userInfoTop');
+            userInfoTop.style.display = 'flex';
+            document.getElementById('currentUserName').textContent = user.username || user.email?.split('@')[0] || 'User';
+            
+            resetToRobot();
+        }
+        
+        async function handleLogout() {
+            if (!confirm('Are you sure you want to logout?')) return;
+            
+            // Mevcut conversation'ı kaydet
+            if (conversationHistory.length > 0) {
+                await saveConversationHistory(currentMode, conversationHistory);
+                console.log('💾 Conversation saved before logout');
+            }
+            
+            if (firebaseInitialized) {
+                auth.signOut().then(() => {
+                    console.log('✅ Logged out from Firebase');
+                    resetAfterLogout();
+                }).catch((error) => {
+                    console.error('Logout error:', error);
+                });
+            } else {
+                // LocalStorage'a da kaydet
+                const user = JSON.parse(localStorage.getItem('nexus_current_user'));
+                if (user && conversationHistory.length > 0) {
+                    const key = `conversations_${user.email}_${currentMode}`;
+                    const conversations = JSON.parse(localStorage.getItem(key) || '[]');
+                    conversations.push({
+                        userId: user.email,
+                        mode: currentMode,
+                        history: conversationHistory,
+                        timestamp: new Date().toISOString()
+                    });
+                    localStorage.setItem(key, JSON.stringify(conversations));
+                }
+                
+                localStorage.removeItem('nexus_current_user');
+                resetAfterLogout();
+            }
+        }
+        
+        function resetAfterLogout() {
+            // Conversation history'yi temizle
+            conversationHistory = [];
+            
+            document.getElementById('modeSelectionScreen').style.display = 'none';
+            document.getElementById('mainScreen').style.display = 'none';
+            document.getElementById('userInfoTop').style.display = 'none';
+            document.getElementById('userInfoMain').style.display = 'none';
+            
+            backToLanding();
+            
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginMessage').style.display = 'none';
+        }
+        
+        // CANVAS ANIMATION
+        function animate() {
+            if (!canvas || !ctx) return;
+            time += 0.02;
+            draw();
+            requestAnimationFrame(animate);
+        }
+        
+        function draw() {
+            if (!ctx) return;
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            if (photoMode && uploadedPhoto) {
+                drawPhotoFace();
+            } else if (currentMode === 'kids') {
+                drawKidsFace();
+            } else {
+                drawAdultFace();
+            }
+        }
+        
+        function drawAdultFace() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const scale = Math.min(canvas.width, canvas.height) / 600;
+            
+            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 400 * scale);
+            gradient.addColorStop(0, 'rgba(0, 50, 100, 0.3)');
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < 50; i++) {
+                const x = centerX + Math.sin(time + i * 0.5) * 200 * scale;
+                const y = centerY + Math.cos(time + i * 0.3) * 200 * scale;
+                const alpha = 0.3 + Math.sin(time * 2 + i) * 0.2;
+                
+                ctx.fillStyle = `rgba(0, 245, 255, ${alpha})`;
+                ctx.beginPath();
+                ctx.arc(x, y, 2 * scale, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            ctx.strokeStyle = 'rgba(0, 245, 255, 0.3)';
+            ctx.lineWidth = 2 * scale;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 200 * scale, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            ctx.strokeStyle = '#00f5ff';
+            ctx.lineWidth = 3 * scale;
+            ctx.shadowBlur = 10 * scale;
+            ctx.shadowColor = '#00f5ff';
+            
+            // Kaşlar biraz daha yukarıda
+            ctx.beginPath();
+            ctx.moveTo(centerX - 110 * scale, centerY - 70 * scale + eyebrowY * scale);
+            ctx.quadraticCurveTo(centerX - 70 * scale, centerY - 80 * scale + eyebrowY * scale, centerX - 30 * scale, centerY - 70 * scale + eyebrowY * scale);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX + 30 * scale, centerY - 70 * scale + eyebrowY * scale);
+            ctx.quadraticCurveTo(centerX + 70 * scale, centerY - 80 * scale + eyebrowY * scale, centerX + 110 * scale, centerY - 70 * scale + eyebrowY * scale);
+            ctx.stroke();
+            
+            if (eyeOpen < 0.1) {
+                ctx.beginPath();
+                ctx.moveTo(centerX - 110 * scale, centerY - 30 * scale);
+                ctx.lineTo(centerX - 50 * scale, centerY - 30 * scale);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(centerX + 50 * scale, centerY - 30 * scale);
+                ctx.lineTo(centerX + 110 * scale, centerY - 30 * scale);
+                ctx.stroke();
+            } else {
+                // Sol göz dış halka
+                ctx.beginPath();
+                ctx.arc(centerX - 80 * scale, centerY - 30 * scale, 30 * scale * eyeOpen, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                // Sağ göz dış halka
+                ctx.beginPath();
+                ctx.arc(centerX + 80 * scale, centerY - 30 * scale, 30 * scale * eyeOpen, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                // Sol göz iç parlaklık
+                const gradEyeLeft = ctx.createRadialGradient(centerX - 80 * scale, centerY - 30 * scale, 0, centerX - 80 * scale, centerY - 30 * scale, 15 * scale);
+                gradEyeLeft.addColorStop(0, '#ffffff');
+                gradEyeLeft.addColorStop(0.4, '#00f5ff');
+                gradEyeLeft.addColorStop(1, '#0044ff');
+                ctx.fillStyle = gradEyeLeft;
+                ctx.shadowBlur = 20 * scale;
+                ctx.beginPath();
+                ctx.arc(centerX - 80 * scale, centerY - 30 * scale, 15 * scale * eyeOpen, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Sağ göz iç parlaklık (sol göz ile aynı)
+                const gradEyeRight = ctx.createRadialGradient(centerX + 80 * scale, centerY - 30 * scale, 0, centerX + 80 * scale, centerY - 30 * scale, 15 * scale);
+                gradEyeRight.addColorStop(0, '#ffffff');
+                gradEyeRight.addColorStop(0.4, '#00f5ff');
+                gradEyeRight.addColorStop(1, '#0044ff');
+                ctx.fillStyle = gradEyeRight;
+                ctx.shadowBlur = 20 * scale;
+                ctx.beginPath();
+                ctx.arc(centerX + 80 * scale, centerY - 30 * scale, 15 * scale * eyeOpen, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            ctx.shadowBlur = 0;
+            
+            const baseY = centerY + 80 * scale;
+            
+            if (speaking) {
+                ctx.strokeStyle = '#ff00ff';
+                ctx.lineWidth = 4 * scale;
+                ctx.shadowBlur = 15 * scale;
+                ctx.shadowColor = '#ff00ff';
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX - 60 * scale, baseY);
+                ctx.quadraticCurveTo(centerX, baseY - 5 * scale, centerX + 60 * scale, baseY);
+                ctx.stroke();
+                
+                ctx.shadowBlur = 0;
+                
+                const barCount = 12;
+                const barWidth = 8 * scale;
+                const startX = centerX - (barCount * barWidth) / 2;
+                
+                for (let i = 0; i < barCount; i++) {
+                    const barX = startX + i * barWidth;
+                    const phase = (time * 8 + i * 0.8);
+                    const barHeight = (8 + Math.sin(phase) * 6) * scale * mouthOpen;
+                    const hue = (i / barCount) * 120 + 180;
+                    ctx.fillStyle = `hsla(${hue}, 100%, 60%, 0.8)`;
+                    
+                    const radius = 2 * scale;
+                    ctx.beginPath();
+                    ctx.roundRect(barX, baseY + 5 * scale, barWidth - 2 * scale, barHeight, radius);
+                    ctx.fill();
+                }
+                
+                ctx.strokeStyle = '#ff00ff';
+                ctx.lineWidth = 4 * scale;
+                ctx.shadowBlur = 15 * scale;
+                ctx.shadowColor = '#ff00ff';
+                ctx.beginPath();
+                ctx.moveTo(centerX - 60 * scale, baseY + 20 * scale + jawY * scale);
+                ctx.quadraticCurveTo(centerX, baseY + 25 * scale + jawY * scale, centerX + 60 * scale, baseY + 20 * scale + jawY * scale);
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+            } else {
+                ctx.strokeStyle = '#00f5ff';
+                ctx.lineWidth = 4 * scale;
+                ctx.shadowBlur = 15 * scale;
+                ctx.shadowColor = '#00f5ff';
+                ctx.beginPath();
+                
+                if (emotion === 'happy') {
+                    ctx.arc(centerX, baseY - 10 * scale, 60 * scale, 0.2 * Math.PI, 0.8 * Math.PI);
+                } else if (emotion === 'sad') {
+                    ctx.arc(centerX, baseY + 40 * scale, 60 * scale, 1.2 * Math.PI, 1.8 * Math.PI);
+                } else {
+                    ctx.moveTo(centerX - 40 * scale, baseY);
+                    ctx.lineTo(centerX + 40 * scale, baseY);
+                }
+                ctx.stroke();
+            }
+            
+            ctx.shadowBlur = 0;
+            ctx.font = `${12 * scale}px monospace`;
+            ctx.fillStyle = 'rgba(0, 245, 255, 0.6)';
+            ctx.fillText('NEXUS v3.0', 20 * scale, 30 * scale);
+            ctx.fillText('[' + emotion.toUpperCase() + ']', centerX - 35 * scale, canvas.height - 40 * scale);
+        }
+        
+        function drawKidsFace() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const baseScale = Math.min(canvas.width, canvas.height) / 600;
+            const scale = 1.5 * baseScale;
+            
+            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 400 * baseScale);
+            gradient.addColorStop(0, 'rgba(255, 200, 255, 0.3)');
+            gradient.addColorStop(1, 'rgba(200, 220, 255, 0.2)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < 30; i++) {
+                const x = (100 + (i * 23) % 600) * baseScale;
+                const y = (50 + ((i * 17) % 500)) * baseScale;
+                const size = (3 + Math.sin(time * 2 + i) * 2) * baseScale;
+                const alpha = 0.5 + Math.sin(time * 3 + i) * 0.3;
+                
+                ctx.fillStyle = `rgba(255, 200, 100, ${alpha})`;
+                ctx.beginPath();
+                for (let j = 0; j < 5; j++) {
+                    const angle = (j * 4 * Math.PI / 5) - Math.PI / 2;
+                    const r = j % 2 === 0 ? size : size / 2;
+                    const px = x + Math.cos(angle) * r;
+                    const py = y + Math.sin(angle) * r;
+                    if (j === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.fill();
+            }
+            
+            ctx.fillStyle = '#ffd8a8';
+            ctx.shadowBlur = 30 * baseScale;
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+            
+            ctx.beginPath();
+            ctx.arc(centerX - 85 * scale, centerY - 80 * scale, 45 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(centerX + 85 * scale, centerY - 80 * scale, 45 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 100 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.shadowBlur = 0;
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY + 30 * scale, 65 * scale, 55 * scale, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            if (bearEyeOpen < 0.3) {
+                ctx.strokeStyle = '#3d2817';
+                ctx.lineWidth = 4 * scale;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(centerX - 55 * scale, centerY - 15 * scale);
+                ctx.quadraticCurveTo(centerX - 40 * scale, centerY - 12 * scale, centerX - 25 * scale, centerY - 15 * scale);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(centerX + 25 * scale, centerY - 15 * scale);
+                ctx.quadraticCurveTo(centerX + 40 * scale, centerY - 12 * scale, centerX + 55 * scale, centerY - 15 * scale);
+                ctx.stroke();
+            } else {
+                ctx.fillStyle = '#3d2817';
+                ctx.beginPath();
+                ctx.ellipse(centerX - 40 * scale, centerY - 15 * scale, 15 * scale, 20 * scale * bearEyeOpen, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(centerX + 40 * scale, centerY - 15 * scale, 15 * scale, 20 * scale * bearEyeOpen, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(centerX - 33 * scale, centerY - 22 * scale, 6 * scale * bearEyeOpen, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(centerX + 47 * scale, centerY - 22 * scale, 6 * scale * bearEyeOpen, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            ctx.fillStyle = 'rgba(255, 182, 193, 0.6)';
+            ctx.beginPath();
+            ctx.arc(centerX - 75 * scale, centerY + 10 * scale, 22 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(centerX + 75 * scale, centerY + 10 * scale, 22 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#8b5a3c';
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY + 15 * scale);
+            ctx.lineTo(centerX - 8 * scale, centerY + 25 * scale);
+            ctx.lineTo(centerX + 8 * scale, centerY + 25 * scale);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.strokeStyle = '#8b5a3c';
+            ctx.lineWidth = 4 * scale;
+            ctx.lineCap = 'round';
+            
+            if (speaking) {
+                const openAmount = 10 * scale + (Math.sin(Date.now() * 0.01) * 8 * scale);
+                ctx.fillStyle = '#ff9999';
+                ctx.beginPath();
+                ctx.ellipse(centerX, centerY + 40 * scale, 28 * scale, 8 * scale + openAmount, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.strokeStyle = '#8b5a3c';
+                ctx.lineWidth = 3 * scale;
+                ctx.beginPath();
+                ctx.ellipse(centerX, centerY + 40 * scale, 28 * scale, 8 * scale + openAmount, 0, 0, Math.PI * 2);
+                ctx.stroke();
+            } else {
+                ctx.beginPath();
+                ctx.arc(centerX, centerY + 25 * scale, 28 * scale, 0.3 * Math.PI, 0.7 * Math.PI);
+                ctx.stroke();
+            }
+        }
+        
+        function drawPhotoFace() {
+            if (!uploadedPhoto) return;
+            
+            const canvasWidth = canvas.width;
+            const canvasHeight = canvas.height;
+            
+            ctx.fillStyle = '#0a0a1a';
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            
+            // Arka plan partikülleri
+            ctx.fillStyle = 'rgba(0, 245, 255, 0.3)';
+            for (let i = 0; i < 30; i++) {
+                const px = Math.sin(time + i * 0.5) * 300 + canvasWidth/2;
+                const py = Math.cos(time * 0.7 + i * 0.3) * 200 + canvasHeight/2;
+                const size = 1 + Math.sin(time * 2 + i) * 0.5;
+                ctx.beginPath();
+                ctx.arc(px, py, size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            let source = uploadedPhoto;
+            let sourceWidth = uploadedPhoto.width;
+            let sourceHeight = uploadedPhoto.height;
+            let isLive = false;
+            
+            // D-ID video stream kontrolü - EN ÖNCE
+            if (talkVideoElement && 
+                talkVideoElement.srcObject && 
+                talkVideoElement.readyState >= talkVideoElement.HAVE_CURRENT_DATA && 
+                talkVideoElement.videoWidth > 0 && 
+                !talkVideoElement.paused) {
+                // CANLI D-ID VIDEO - bunu göster
+                source = talkVideoElement;
+                sourceWidth = talkVideoElement.videoWidth;
+                sourceHeight = talkVideoElement.videoHeight;
+                isLive = true;
+            }
+            
+            const imgAspect = sourceWidth / sourceHeight;
+            const maxHeight = canvasHeight * 0.75;
+            const maxWidth = canvasWidth * 0.7;
+            
+            let drawWidth, drawHeight;
+            
+            if (imgAspect > maxWidth / maxHeight) {
+                drawWidth = maxWidth;
+                drawHeight = drawWidth / imgAspect;
+            } else {
+                drawHeight = maxHeight;
+                drawWidth = drawHeight * imgAspect;
+            }
+            
+            const drawX = (canvasWidth - drawWidth) / 2;
+            const drawY = (canvasHeight - drawHeight) / 2 - 20;
+            
+            ctx.save();
+            
+            // Border
+            const borderColor = speaking ? '#ff00ff' : (isLive ? '#00ff00' : '#00f5ff');
+            ctx.shadowBlur = speaking ? 40 : (isLive ? 25 : 20);
+            ctx.shadowColor = borderColor;
+            
+            const radius = 15;
+            ctx.beginPath();
+            ctx.roundRect(drawX - 5, drawY - 5, drawWidth + 10, drawHeight + 10, radius);
+            ctx.strokeStyle = borderColor;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            ctx.shadowBlur = 0;
+            
+            // Clip bölgesi
+            ctx.beginPath();
+            ctx.roundRect(drawX, drawY, drawWidth, drawHeight, radius - 3);
+            ctx.clip();
+            
+            // Resmi/videoyu çiz
+            ctx.drawImage(source, drawX, drawY, drawWidth, drawHeight);
+            
+            ctx.restore();
+            
+            // Konuşma dalgaları
+            if (speaking) {
+                ctx.strokeStyle = 'rgba(255, 0, 255, 0.4)';
+                ctx.lineWidth = 2;
+                for (let i = 0; i < 3; i++) {
+                    const waveOffset = (time * 2 + i * 0.7) % 2;
+                    const alpha = 1 - waveOffset / 2;
+                    ctx.globalAlpha = alpha * 0.4;
+                    ctx.beginPath();
+                    ctx.arc(drawX + drawWidth / 2, drawY + drawHeight / 2, Math.max(drawWidth, drawHeight) / 2 + 15 + waveOffset * 35, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+                ctx.globalAlpha = 1;
+            }
+            
+            // Durum yazısı
+            ctx.font = '14px Orbitron';
+            ctx.fillStyle = isLive ? '#00ff00' : '#00f5ff';
+            ctx.textAlign = 'center';
+            
+            const modeText = speaking ? '🎤 SPEAKING' : (isLive ? '✨ LIVE AVATAR' : '📷 PHOTO MODE');
+            ctx.fillText(modeText, canvasWidth / 2, canvasHeight - 45);
+            
+            const emotionColors = {
+                happy: '#00ff00', sad: '#0088ff', surprised: '#ffff00', angry: '#ff0000',
+                listening: '#00ff88', excited: '#ff00ff', empathetic: '#ff88ff',
+                confident: '#00ffff', playful: '#ffaa00', curious: '#88ff00', neutral: '#00f5ff'
+            };
+            ctx.fillStyle = emotionColors[emotion] || '#00f5ff';
+            ctx.fillText(`[${emotion.toUpperCase()}]`, canvasWidth / 2, canvasHeight - 22);
+        }
+        
+        function blink() {
+            eyeOpen = 0;
+            setTimeout(() => eyeOpen = 0.3, 80);
+            setTimeout(() => eyeOpen = 1, 160);
+            setTimeout(blink, 3000 + Math.random() * 2000);
+        }
+        
+        function bearBlink() {
+            bearEyeOpen = 0;
+            setTimeout(() => bearEyeOpen = 0.3, 100);
+            setTimeout(() => bearEyeOpen = 1, 200);
+            setTimeout(bearBlink, 2500 + Math.random() * 3000);
+        }
+        
+        // Idle animation için değişkenler (REMOVED - using D-ID's built-in 'lively' driver)
+        let idleAnimationInterval = null;
+        
+        function startIdleAnimation() {
+            // DISABLED: D-ID's driver_url: 'bank://lively' provides natural idle animations
+            // No need for extra API calls - avatar blinks and breathes automatically!
+            return;
+        }
+        
+        function stopIdleAnimation() {
+            if (idleAnimationInterval) {
+                clearInterval(idleAnimationInterval);
+                idleAnimationInterval = null;
+            }
+        }
+        
+        // Video durumu izleme
+        let videoCheckInterval = null;
+        
+        function startVideoMonitoring() {
+            // Önceki interval'i temizle
+            if (videoCheckInterval) {
+                clearInterval(videoCheckInterval);
+            }
+            
+            console.log('👁️ Starting video monitoring...');
+            
+            // Her saniye video durumunu kontrol et
+            videoCheckInterval = setInterval(() => {
+                if (photoMode && talkVideoElement && talkVideoElement.srcObject && didStreamReady) {
+                    const isPaused = talkVideoElement.paused;
+                    const isEnded = talkVideoElement.ended;
+                    const readyState = talkVideoElement.readyState;
+                    
+                    // Video duraklamışsa ve konuşmuyorsa tekrar başlat
+                    if (isPaused && !speaking) {
+                        console.log('⚠️ Video paused, restarting... (readyState:', readyState, ')');
+                        talkVideoElement.play().catch(e => console.log('❌ Resume error:', e));
+                    }
+                    
+                    // Video bitmiş mi kontrol et
+                    if (isEnded) {
+                        console.log('⚠️ Video ended, restarting...');
+                        talkVideoElement.currentTime = 0;
+                        talkVideoElement.play().catch(e => console.log('❌ Restart error:', e));
+                    }
+                    
+                    // Debugging bilgisi (5 saniyede bir)
+                    if (Date.now() % 5000 < 1000) {
+                        console.log('📊 Video status - Playing:', !isPaused, 'Ready:', readyState, 'Size:', talkVideoElement.videoWidth + 'x' + talkVideoElement.videoHeight);
+                    }
+                }
+            }, 1000);
+        }
+        
+        function stopVideoMonitoring() {
+            if (videoCheckInterval) {
+                clearInterval(videoCheckInterval);
+                videoCheckInterval = null;
+            }
+        }
+        
+        function testFace(emo) {
+            emotion = emo;
+            
+            if (emo === 'happy') eyebrowY = -20;
+            else if (emo === 'sad') eyebrowY = 10;
+            else if (emo === 'surprised') eyebrowY = -30;
+            else if (emo === 'angry') eyebrowY = 5;
+            else if (emo === 'listening') eyebrowY = -15;
+            else eyebrowY = -10;
+        }
+        
+        function startLipSync(text) {
+            speaking = true;
+            
+            const animateMouth = () => {
+                if (!speaking) {
+                    mouthOpen = 0;
+                    jawY = 0;
+                    return;
+                }
+                
+                const wave = Math.sin(Date.now() * 0.01) * 0.5 + 0.5;
+                mouthOpen = 0.4 + wave * 0.4;
+                jawY = 10 + wave * 15;
+                
+                requestAnimationFrame(animateMouth);
+            };
+            
+            animateMouth();
+        }
+        
+        function stopLipSync() {
+            speaking = false;
+            mouthOpen = 0;
+            jawY = 0;
+        }
+        
+        // EMOTION DETECTION
+        function detectEmotion(text) {
+            const lowerText = text.toLowerCase();
+            
+            const emotionPatterns = {
+                happy: {
+                    strong: ['çok mutlu', 'çok sevindim', 'harika', 'mükemmel', 'muhteşem', 'teşekkürler', 'sağol'],
+                    emojis: ['😊', '😄', '😃', '🎉', '✨', '❤️', '💕'],
+                    weight: 0
+                },
+                sad: {
+                    strong: ['çok üzgün', 'çok kötü', 'mutsuzum', 'üzücü', 'maalesef'],
+                    emojis: ['😢', '😔', '😞', '😭', '💔'],
+                    weight: 0
+                },
+                surprised: {
+                    strong: ['inanamıyorum', 'şok oldum', 'vay be', 'oha', 'gerçekten mi'],
+                    emojis: ['😮', '😲', '😯', '🤯'],
+                    weight: 0
+                },
+                angry: {
+                    strong: ['çok sinirliyim', 'çok kızgınım', 'bıktım', 'yeter artık'],
+                    emojis: ['😠', '😡', '🤬', '💢'],
+                    weight: 0
+                },
+                neutral: { strong: [], emojis: [], weight: 0 }
+            };
+            
+            Object.keys(emotionPatterns).forEach(emo => {
+                let score = 0;
+                
+                emotionPatterns[emo].strong.forEach(phrase => {
+                    if (lowerText.includes(phrase)) score += 5;
+                });
+                
+                emotionPatterns[emo].emojis.forEach(emoji => {
+                    if (text.includes(emoji)) score += 8;
+                });
+                
+                emotionPatterns[emo].weight = score;
+            });
+            
+            let maxScore = 0;
+            let detectedEmotion = 'neutral';
+            
+            Object.keys(emotionPatterns).forEach(emo => {
+                if (emotionPatterns[emo].weight > maxScore) {
+                    maxScore = emotionPatterns[emo].weight;
+                    detectedEmotion = emo;
+                }
+            });
+            
+            if (maxScore < 5) return null;
+            
+            return { emotion: detectedEmotion, confidence: maxScore };
+        }
+        
+        function updateEmotion(newEmotionResult) {
+            if (!newEmotionResult) return currentConversationEmotion;
+            
+            const { emotion: newEmotion, confidence: newConfidence } = newEmotionResult;
+            
+            if (newEmotion === currentConversationEmotion) {
+                emotionConfidence = Math.max(emotionConfidence, newConfidence);
+                return currentConversationEmotion;
+            }
+            
+            if (newConfidence > emotionConfidence || emotionConfidence < 3) {
+                currentConversationEmotion = newEmotion;
+                emotionConfidence = newConfidence;
+                testFace(newEmotion);
+            }
+            
+            return currentConversationEmotion;
+        }
+        
+        // HISTORY
+        let currentHistoryFilter = 'all';
+        let previousSessions = [];
+        
+        async function toggleHistory() {
+            const panel = document.getElementById('historyPanel');
+            if (panel) {
+                if (panel.style.display === 'none') {
+                    panel.style.display = 'block';
+                    await loadAllHistory();
+                } else {
+                    panel.style.display = 'none';
+                }
+            }
+        }
+        
+        async function loadAllHistory() {
+            const historyContent = document.getElementById('historyContent');
+            if (!historyContent) return;
+            
+            historyContent.innerHTML = '<div style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">Loading history...</div>';
+            
+            previousSessions = [];
+            
+            if (firebaseInitialized && auth.currentUser) {
+                // Firebase'den kullanıcıya özel oturumları yükle
+                try {
+                    const snapshot = await db.collection('conversations')
+                        .where('userId', '==', auth.currentUser.uid)
+                        .where('mode', '==', currentMode)
+                        .orderBy('timestamp', 'desc')
+                        .limit(10)
+                        .get();
+                    
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        previousSessions.push({
+                            id: doc.id,
+                            ...data
+                        });
+                    });
+                    
+                    console.log(`✅ Loaded ${previousSessions.length} sessions for user:`, auth.currentUser.email);
+                } catch (error) {
+                    console.error('Error loading history:', error);
+                }
+            } else {
+                // LocalStorage fallback - kullanıcı özel
+                const user = JSON.parse(localStorage.getItem('nexus_current_user'));
+                if (user) {
+                    const key = `conversations_${user.email}_${currentMode}`;
+                    const conversations = JSON.parse(localStorage.getItem(key) || '[]');
+                    previousSessions = conversations.filter(conv => conv.userId === user.email);
+                    console.log(`✅ Loaded ${previousSessions.length} sessions from localStorage for:`, user.email);
+                }
+            }
+            
+            renderHistory();
+        }
+        
+        function renderHistory() {
+            const historyContent = document.getElementById('historyContent');
+            if (!historyContent) return;
+            
+            let html = '';
+            
+            // Mevcut oturum
+            if ((currentHistoryFilter === 'all' || currentHistoryFilter === 'current') && conversationHistory.length > 0) {
+                html += '<div class="history-session">';
+                html += '<div class="history-session-header">';
+                html += '<span class="history-session-mode">🟢 CURRENT SESSION</span>';
+                html += '<span class="history-session-date">' + new Date().toLocaleString('tr-TR') + '</span>';
+                html += '</div>';
+                
+                conversationHistory.forEach(msg => {
+                    const color = msg.role === 'user' ? '#00f5ff' : '#ff00ff';
+                    const icon = msg.role === 'user' ? '◉ YOU' : '◈ NEXUS';
+                    
+                    html += `
+                        <div class="history-item ${msg.role}">
+                            <div class="history-meta">
+                                <span class="history-role" style="color: ${color}">${icon}</span>
+                                <span class="history-timestamp">${msg.timestamp || ''}</span>
+                            </div>
+                            <div class="history-text">${msg.text}</div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+            }
+            
+            // Önceki oturumlar
+            if ((currentHistoryFilter === 'all' || currentHistoryFilter === 'previous') && previousSessions.length > 0) {
+                previousSessions.forEach((session, idx) => {
+                    if (!session.history || session.history.length === 0) return;
+                    
+                    let sessionDate;
+                    if (session.timestamp) {
+                        // Firebase Timestamp veya string
+                        if (session.timestamp.toDate) {
+                            sessionDate = session.timestamp.toDate();
+                        } else if (typeof session.timestamp === 'string') {
+                            sessionDate = new Date(session.timestamp);
+                        } else {
+                            sessionDate = new Date();
+                        }
+                    } else {
+                        sessionDate = new Date();
+                    }
+                    
+                    html += '<div class="history-session">';
+                    html += '<div class="history-session-header">';
+                    html += `<span class="history-session-mode">📁 SESSION ${idx + 1}</span>`;
+                    html += '<span class="history-session-date">' + sessionDate.toLocaleString('tr-TR') + '</span>';
+                    html += '</div>';
+                    
+                    session.history.forEach(msg => {
+                        const color = msg.role === 'user' ? '#00f5ff' : '#ff00ff';
+                        const icon = msg.role === 'user' ? '◉ YOU' : '◈ NEXUS';
+                        
+                        html += `
+                            <div class="history-item ${msg.role}">
+                                <div class="history-meta">
+                                    <span class="history-role" style="color: ${color}">${icon}</span>
+                                    <span class="history-timestamp">${msg.timestamp || ''}</span>
+                                </div>
+                                <div class="history-text">${msg.text}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div>';
+                });
+            }
+            
+            if (html === '') {
+                html = '<div style="text-align: center; color: rgba(255,255,255,0.5); padding: 40px;">No conversation history yet.<br>Start chatting to see your history here!</div>';
+            }
+            
+            historyContent.innerHTML = html;
+        }
+        
+        function filterHistory(filter) {
+            currentHistoryFilter = filter;
+            
+            // Buton stillerini güncelle
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderHistory();
+        }
+        
+        async function clearHistory() {
+            if (!confirm('Are you sure you want to clear all conversation history?')) return;
+            
+            // Mevcut oturumu temizle
+            conversationHistory = [];
+            
+            if (firebaseInitialized && auth.currentUser) {
+                // Firebase'deki sadece kullanıcının kendi konuşmalarını sil
+                try {
+                    const snapshot = await db.collection('conversations')
+                        .where('userId', '==', auth.currentUser.uid)
+                        .where('mode', '==', currentMode)
+                        .get();
+                    
+                    const batch = db.batch();
+                    snapshot.docs.forEach(doc => {
+                        batch.delete(doc.ref);
+                    });
+                    await batch.commit();
+                    
+                    previousSessions = [];
+                    renderHistory();
+                    
+                    console.log('✅ History cleared for user:', auth.currentUser.email);
+                    document.getElementById('status').innerHTML = '<span class="highlight" style="color: #00ff88;">✓ Your history cleared</span>';
+                } catch (error) {
+                    console.error('Error clearing history:', error);
+                    document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ff4444;">✗ Error clearing history</span>';
+                }
+            } else {
+                // LocalStorage'dan sadece kullanıcının kendi verilerini sil
+                const user = JSON.parse(localStorage.getItem('nexus_current_user'));
+                if (user) {
+                    const key = `conversations_${user.email}_${currentMode}`;
+                    localStorage.removeItem(key);
+                    previousSessions = [];
+                    console.log('✅ History cleared from localStorage for:', user.email);
+                }
+                renderHistory();
+                document.getElementById('status').innerHTML = '<span class="highlight" style="color: #00ff88;">✓ Your history cleared</span>';
+            }
+        }
+        
+        function addToHistory(role, text, emo = 'neutral') {
+            const now = new Date();
+            const date = now.toLocaleDateString('tr-TR');
+            const time = now.toLocaleTimeString('tr-TR');
+            conversationHistory.push({ role, text, emotion: emo, timestamp: `${date} ${time}` });
+            
+            // History paneli açıksa güncelle
+            if (document.getElementById('historyPanel').style.display !== 'none') {
+                renderHistory();
+            }
+            
+            // Her 3 mesajda bir otomatik kaydet
+            if (conversationHistory.length % 3 === 0) {
+                saveConversationHistory(currentMode, conversationHistory)
+                    .then(() => console.log('💾 Auto-saved conversation'))
+                    .catch(err => console.log('Auto-save error:', err));
+            }
+        }
+        
+        // PHOTO UPLOAD
+        async function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ffaa00;">📷 Loading photo...</span>';
+            
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const uploadedPhotoBase64 = e.target.result;
+                
+                const img = new Image();
+                img.onload = async () => {
+                    uploadedPhoto = img;
+                    
+                    if (faceApiLoaded) {
+                        try {
+                            const detection = await faceapi.detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
+                                .withFaceLandmarks()
+                                .withAgeAndGender();
+                            
+                            if (detection) {
+                                detectedGender = detection.gender;
+                                const genderText = detectedGender === 'male' ? '👨 Male' : '👩 Female';
+                                document.getElementById('status').innerHTML = `<span class="highlight" style="color: #00ff88;">${genderText} detected</span>`;
+                            }
+                        } catch (e) {
+                            console.error('Gender detection error:', e);
+                        }
+                    }
+                    
+                    document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ffaa00;">📤 Uploading to D-ID...</span>';
+                    
+                    try {
+                        const base64Data = uploadedPhotoBase64.split(',')[1];
+                        const byteCharacters = atob(base64Data);
+                        const byteNumbers = new Array(byteCharacters.length);
+                        for (let i = 0; i < byteCharacters.length; i++) {
+                            byteNumbers[i] = byteCharacters.charCodeAt(i);
+                        }
+                        const byteArray = new Uint8Array(byteNumbers);
+                        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+                        
+                        const formData = new FormData();
+                        formData.append('image', blob, 'photo.jpg');
+                        
+                        const uploadResponse = await fetch('https://api.d-id.com/images', {
+                            method: 'POST',
+                            headers: { 'Authorization': 'Basic ' + DID_API_KEY },
+                            body: formData
+                        });
+                        
+                        if (!uploadResponse.ok) {
+                            const err = await uploadResponse.text();
+                            if (err.includes('CelebrityDetectedError')) {
+                                document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ff4444;">⚠️ Celebrity detected!</span>';
+                                return;
+                            }
+                            throw new Error('Upload failed');
+                        }
+                        
+                        const uploadData = await uploadResponse.json();
+                        didImageUrl = uploadData.url;
+                        
+                        document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ffaa00;">🔗 Connecting stream...</span>';
+                        
+                        const streamStarted = await startDidStream(didImageUrl);
+                        
+                        if (streamStarted) {
+                            photoMode = true;
+                            document.getElementById('resetFaceBtn').style.display = 'inline-block';
+                        } else {
+                            document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ff4444;">❌ Stream failed</span>';
+                        }
+                        
+                    } catch (uploadError) {
+                        console.error('Error:', uploadError);
+                        document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ff4444;">❌ Error occurred</span>';
+                        photoMode = false;
+                        document.getElementById('resetFaceBtn').style.display = 'none';
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        async function startDidStream(imageUrl) {
+            console.log('Starting D-ID Stream...', imageUrl);
+            
+            if (!talkVideoElement) {
+                talkVideoElement = document.createElement('video');
+                talkVideoElement.id = 'did-video';
+                talkVideoElement.style.display = 'none';
+                talkVideoElement.autoplay = true;
+                talkVideoElement.playsInline = true;
+                talkVideoElement.muted = true; // İLK BAŞTA MUTED - sonra unmute edeceğiz
+                talkVideoElement.loop = false;
+                document.body.appendChild(talkVideoElement);
+                
+                console.log('Video element created:', talkVideoElement);
+            }
+            
+            // Stream'i sıfırla
+            if (talkVideoElement.srcObject) {
+                talkVideoElement.srcObject.getTracks().forEach(track => track.stop());
+            }
+            talkVideoElement.srcObject = null;
+            frozenFrame = null;
+            
+            try {
+                const streamRes = await fetch('https://api.d-id.com/talks/streams', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Basic ' + DID_API_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        source_url: imageUrl,
+                        driver_url: 'bank://lively' // Otomatik göz kırpma ve nefes alma animasyonu
+                    })
+                });
+                
+                if (!streamRes.ok) {
+                    const errorText = await streamRes.text();
+                    console.error('❌ Stream creation error:', errorText);
+                    return false;
+                }
+                
+                const streamData = await streamRes.json();
+                streamId = streamData.id;
+                sessionId = streamData.session_id;
+                const sdpOffer = streamData.offer;
+                const iceServers = streamData.ice_servers;
+                
+                peerConnection = new RTCPeerConnection({ iceServers });
+                
+                peerConnection.ontrack = (event) => {
+                    console.log('🎥 Track received:', event.track.kind);
+                    if (event.track.kind === 'video') {
+                        const stream = event.streams[0];
+                        console.log('📹 Video stream received, tracks:', stream.getTracks().length);
+                        
+                        talkVideoElement.srcObject = stream;
+                        
+                        // Video metadata yüklendiğinde
+                        talkVideoElement.onloadedmetadata = () => {
+                            console.log('✅ Video metadata loaded! Size:', talkVideoElement.videoWidth, 'x', talkVideoElement.videoHeight);
+                            
+                            // Metadata yüklenince hemen oynat
+                            setTimeout(() => {
+                                talkVideoElement.play().catch(e => {
+                                    console.log('Auto-play failed, waiting for interaction:', e);
+                                });
+                            }, 100);
+                        };
+                        
+                        // Video oynatılmaya başladığında
+                        talkVideoElement.onplaying = () => {
+                            console.log('▶️ Video is now PLAYING! Avatar should be alive now.');
+                            frozenFrame = null;
+                        };
+                        
+                        // Video durduğunda
+                        talkVideoElement.onpause = () => {
+                            console.log('⏸️ Video PAUSED - trying to resume...');
+                            // Idle durumda pause olmamalı, tekrar oynat
+                            if (photoMode && !speaking) {
+                                setTimeout(() => {
+                                    talkVideoElement.play().catch(e => console.log('Resume failed:', e));
+                                }, 100);
+                            }
+                        };
+                        
+                        // İlk oynatmayı dene
+                        talkVideoElement.play()
+                            .then(() => {
+                                console.log('✅ Initial play() successful!');
+                                frozenFrame = null;
+                            })
+                            .catch(error => {
+                                console.log('⚠️ Initial play() failed (normal for autoplay policy):', error.name);
+                                
+                                // Kullanıcı etkileşimi bekle
+                                const playOnInteraction = () => {
+                                    talkVideoElement.play()
+                                        .then(() => {
+                                            console.log('✅ Play successful after user interaction!');
+                                            document.removeEventListener('click', playOnInteraction);
+                                            document.removeEventListener('touchstart', playOnInteraction);
+                                        })
+                                        .catch(err => console.log('Play still failed:', err));
+                                };
+                                document.addEventListener('click', playOnInteraction, { once: true });
+                                document.addEventListener('touchstart', playOnInteraction, { once: true });
+                            });
+                    }
+                };
+                
+                peerConnection.oniceconnectionstatechange = async () => {
+                    if (peerConnection.iceConnectionState === 'connected' || 
+                        peerConnection.iceConnectionState === 'completed') {
+                        didStreamReady = true;
+                        document.getElementById('status').innerHTML = '<span class="highlight" style="color: #00ff88;">✅ Avatar is alive! Ready to talk.</span>';
+                        
+                        console.log('✅ D-ID stream connected! Avatar has natural idle animations (blink, breathe).');
+                        
+                        // Video'nun oynadığından emin ol
+                        if (talkVideoElement) {
+                            talkVideoElement.play().catch(e => console.log('Auto-play error:', e));
+                        }
+                        
+                        // Video monitoring'i başlat
+                        startVideoMonitoring();
+                    }
+                };
+                
+                peerConnection.onicecandidate = async (event) => {
+                    if (event.candidate) {
+                        await fetch(`https://api.d-id.com/talks/streams/${streamId}/ice`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': 'Basic ' + DID_API_KEY,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                candidate: event.candidate.candidate,
+                                sdpMid: event.candidate.sdpMid,
+                                sdpMLineIndex: event.candidate.sdpMLineIndex,
+                                session_id: sessionId
+                            })
+                        });
+                    } else {
+                        await fetch(`https://api.d-id.com/talks/streams/${streamId}/ice`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': 'Basic ' + DID_API_KEY,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ session_id: sessionId })
+                        });
+                    }
+                };
+                
+                await peerConnection.setRemoteDescription(new RTCSessionDescription(sdpOffer));
+                const sdpAnswer = await peerConnection.createAnswer();
+                await peerConnection.setLocalDescription(sdpAnswer);
+                
+                const sdpRes = await fetch(`https://api.d-id.com/talks/streams/${streamId}/sdp`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Basic ' + DID_API_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        answer: { type: 'answer', sdp: sdpAnswer.sdp },
+                        session_id: sessionId
+                    })
+                });
+                
+                if (!sdpRes.ok) console.error('SDP Answer error:', await sdpRes.text());
+                
+                return true;
+                
+            } catch (error) {
+                console.error('D-ID Stream error:', error);
+                return false;
+            }
+        }
+        
+        async function speakOnStream(text) {
+            if (!streamId || !sessionId || !didStreamReady) {
+                console.error('❌ Stream not ready! streamId:', streamId, 'sessionId:', sessionId, 'ready:', didStreamReady);
+                return false;
+            }
+            
+            try {
+                console.log('🗣️ Speaking on stream:', text.substring(0, 50) + '...');
+                
+                // Video'yu unmute et (konuşurken ses gerekli)
+                if (talkVideoElement) {
+                    talkVideoElement.muted = false;
+                    talkVideoElement.volume = 1;
+                }
+                
+                const voiceId = detectedGender === 'male' ? 'tr-TR-AhmetNeural' : 'tr-TR-EmelNeural';
+                
+                const res = await fetch(`https://api.d-id.com/talks/streams/${streamId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Basic ' + DID_API_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        script: {
+                            type: 'text',
+                            input: text,
+                            provider: { type: 'microsoft', voice_id: voiceId }
+                        },
+                        session_id: sessionId
+                    })
+                });
+                
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    console.error('❌ Speak request failed:', errorText);
+                    return false;
+                }
+                
+                console.log('✅ Speak request sent successfully');
+                speaking = true;
+                
+                return true;
+                
+            } catch (error) {
+                console.error('❌ Speak error:', error);
+                return false;
+            }
+        }
+        
+        async function closeDidStream() {
+            console.log('Closing D-ID stream...');
+            
+            // Video monitoring'i durdur
+            stopVideoMonitoring();
+            
+            // Idle animasyonu durdur
+            stopIdleAnimation();
+            
+            if (streamId) {
+                try {
+                    await fetch(`https://api.d-id.com/talks/streams/${streamId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': 'Basic ' + DID_API_KEY,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ session_id: sessionId })
+                    });
+                } catch (e) {
+                    console.log('Stream close error:', e);
+                }
+            }
+            
+            if (peerConnection) {
+                peerConnection.close();
+                peerConnection = null;
+            }
+            
+            streamId = null;
+            sessionId = null;
+            didStreamReady = false;
+        }
+        
+        async function resetToRobot() {
+            await closeDidStream();
+            
+            // Video elementi temizle
+            if (talkVideoElement) {
+                if (talkVideoElement.srcObject) {
+                    talkVideoElement.srcObject.getTracks().forEach(track => track.stop());
+                }
+                talkVideoElement.srcObject = null;
+                talkVideoElement.pause();
+            }
+            
+            photoMode = false;
+            uploadedPhoto = null;
+            didImageUrl = null;
+            detectedGender = 'male';
+            frozenFrame = null;
+            document.getElementById('resetFaceBtn').style.display = 'none';
+            document.getElementById('photoInput').value = '';
+            document.getElementById('status').innerHTML = '<span class="highlight">🤖 Robot mode restored</span>';
+        }
+        
+        function stopSpeaking() {
+            shouldStopSpeaking = true;
+            
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                currentAudio = null;
+            }
+            
+            stopLipSync();
+            
+            // D-ID video stream'i durdur
+            if (photoMode && didStreamReady && streamId && sessionId) {
+                fetch(`https://api.d-id.com/talks/streams/${streamId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Basic ' + DID_API_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ session_id: sessionId })
+                }).catch(e => console.log('Stop stream error:', e));
+                
+                // Video'yu durdur
+                if (talkVideoElement) {
+                    talkVideoElement.pause();
+                    talkVideoElement.currentTime = 0;
+                }
+                
+                console.log('🛑 Video and audio stopped');
+            }
+            
+            // Video'yu mute yap ama oynamaya devam etsin (idle animasyon için)
+            if (photoMode && talkVideoElement && !didStreamReady) {
+                talkVideoElement.muted = true;
+                console.log('🔇 Video muted, natural idle animations continue');
+            }
+            
+            document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ffaa00;">⏹️ Stopped</span>';
+        }
+        
+        function getApiKey() {
+            if (EMBEDDED_API_KEY && EMBEDDED_API_KEY.startsWith('sk-')) {
+                return EMBEDDED_API_KEY;
+            }
+            return localStorage.getItem('openai_api_key');
+        }
+        
+        // VOICE INPUT
+        function toggleTalk() {
+            const key = getApiKey();
+            if (!key) {
+                document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ff4444;">⚠️ API Key not found!</span>';
+                return;
+            }
+            
+            if (!listening) {
+                startRecording();
+            } else {
+                stopRecording();
+            }
+        }
+        
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                const source = audioContext.createMediaStreamSource(stream);
+                source.connect(analyser);
+                analyser.fftSize = 256;
+                
+                mediaRecorder = new MediaRecorder(stream);
+                const chunks = [];
+                
+                mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+                mediaRecorder.onstop = async () => {
+                    const blob = new Blob(chunks, { type: 'audio/webm' });
+                    if (blob.size > 1000) {
+                        await processAudio(blob);
+                    } else {
+                        document.getElementById('status').innerHTML = '<span class="highlight">⚠️ No audio detected, try again.</span>';
+                        testFace('neutral');
+                    }
+                };
+                
+                mediaRecorder.start();
+                listening = true;
+                checkingAudio = true;
+                recordingStartTime = Date.now();
+                silenceStart = null;
+                
+                document.getElementById('talkBtn').textContent = '🎤 LISTENING...';
+                document.getElementById('talkBtn').style.animation = 'pulse 1s infinite';
+                document.getElementById('status').innerHTML = '<span class="highlight" style="color: #00ff88;">🎤 Listening...</span><br>Speak now, will auto-stop when done.';
+                testFace('listening');
+                
+                detectSilence();
+                
+            } catch (error) {
+                document.getElementById('status').innerHTML = `<span class="highlight" style="color: #ff4444;">⚠️ Microphone error:</span> ${error.message}`;
+                testFace('sad');
+            }
+        }
+        
+        function detectSilence() {
+            if (!analyser || !checkingAudio) return;
+            
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            
+            function checkAudioLevel() {
+                if (!listening || !checkingAudio) return;
+                
+                analyser.getByteFrequencyData(dataArray);
+                
+                let sum = 0;
+                for (let i = 0; i < bufferLength; i++) {
+                    sum += dataArray[i];
+                }
+                const average = sum / bufferLength / 255;
+                
+                const recordingTime = Date.now() - recordingStartTime;
+                
+                if (average < SILENCE_THRESHOLD && recordingTime > MIN_RECORDING_TIME) {
+                    if (silenceStart === null) {
+                        silenceStart = Date.now();
+                    } else if (Date.now() - silenceStart > SILENCE_DURATION) {
+                        console.log('🔇 Silence detected, stopping...');
+                        stopRecording();
+                        return;
+                    }
+                } else {
+                    silenceStart = null;
+                }
+                
+                if (listening && checkingAudio) {
+                    requestAnimationFrame(checkAudioLevel);
+                }
+            }
+            
+            checkAudioLevel();
+        }
+        
+        function stopRecording() {
+            if (mediaRecorder && listening) {
+                checkingAudio = false;
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(t => t.stop());
+                listening = false;
+                silenceStart = null;
+                
+                if (audioContext) {
+                    audioContext.close();
+                    audioContext = null;
+                }
+                
+                document.getElementById('talkBtn').textContent = '🎤 VOICE INPUT';
+                document.getElementById('talkBtn').style.animation = 'none';
+            }
+        }
+        
+        async function processAudio(blob) {
+            const key = getApiKey();
+            
+            document.getElementById('status').innerHTML = '<span class="highlight">🎤 Processing speech...</span>';
+            testFace('listening');
+            
+            try {
+                const formData = new FormData();
+                formData.append('file', blob, 'audio.webm');
+                formData.append('model', 'whisper-1');
+                formData.append('language', 'tr');
+                
+                const whisperRes = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${key}` },
+                    body: formData
+                });
+                
+                const whisperData = await whisperRes.json();
+                const text = whisperData.text;
+                
+                if (!text || text.trim() === '') {
+                    document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ffaa00;">⚠️ Could not understand, try again.</span>';
+                    testFace('neutral');
+                    return;
+                }
+                
+                addToHistory('user', text);
+                document.getElementById('status').innerHTML = `<span class="highlight">YOU:</span> "${text}"`;
+                
+                const userEmotionResult = detectEmotion(text);
+                if (userEmotionResult) {
+                    if (userEmotionResult.emotion === 'sad') {
+                        testFace('empathetic');
+                    } else if (userEmotionResult.emotion === 'happy') {
+                        testFace('happy');
+                    }
+                }
+                
+                testFace('listening');
+                
+                let systemPrompt;
+                if (currentMode === 'kids') {
+                    systemPrompt = 'Sen PATI Ayıcık\'sın! Çocuklarla konuşuyorsun. Basit, eğitici ve neşeli cevaplar ver. Emojiler kullan. Cevapların 2-3 cümle olsun.';
+                } else if (currentMode === 'casual') {
+                    systemPrompt = 'Sen samimi ve yardımsever bir arkadaşsın. Doğal konuş ama dolgu kelimeleriyle BAŞLAMA. Cevapların 3-4 cümle olsun.';
+                } else {
+                    systemPrompt = 'Sen profesyonel bir uzmansın. Net ve bilgilendirici cevaplar ver. Cevapların 3-4 cümle olsun.';
+                }
+                
+                let messagesForGPT = [{ role: 'system', content: systemPrompt }];
+                
+                const recentHistory = conversationHistory.slice(-20);
+                for (const msg of recentHistory) {
+                    messagesForGPT.push({
+                        role: msg.role === 'user' ? 'user' : 'assistant',
+                        content: msg.text
+                    });
+                }
+                
+                messagesForGPT.push({ role: 'user', content: text });
+                
+                if (photoMode) {
+                    try {
+                        if (!didStreamReady) {
+                            document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ffaa00;">⏳ Avatar is loading, please wait...</span>';
+                            
+                            let waitCount = 0;
+                            while (!didStreamReady && waitCount < 100) {
+                                await new Promise(r => setTimeout(r, 100));
+                                waitCount++;
+                            }
+                            
+                            if (!didStreamReady) {
+                                document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ff4444;">❌ Avatar not ready. Try again.</span>';
+                                return;
+                            }
+                        }
+                        
+                        document.getElementById('status').innerHTML = '<span class="highlight" style="color: #00f5ff;">🤖 Thinking...</span>';
+                        
+                        shouldStopSpeaking = false;
+                        
+                        const gptRes = await fetch('https://api.openai.com/v1/chat/completions', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${key}`
+                            },
+                            body: JSON.stringify({
+                                model: 'gpt-4o-mini',
+                                messages: messagesForGPT,
+                                temperature: 0.7,
+                                max_tokens: 300
+                            })
+                        });
+                        
+                        const gptData = await gptRes.json();
+                        const fullResponse = gptData.choices[0].message.content;
+                        
+                        addToHistory('assistant', fullResponse);
+                        document.getElementById('status').innerHTML = `<span class="highlight">NEXUS:</span> "${fullResponse.substring(0, 60)}..."`;
+                        
+                        const success = await speakOnStream(fullResponse);
+                        
+                        if (success) {
+                            document.getElementById('status').innerHTML = '<span class="highlight" style="color: #00ff88;">🗣️ Speaking...</span>';
+                            
+                            await new Promise(resolve => {
+                                const checkSpeaking = setInterval(() => {
+                                    if (!speaking || shouldStopSpeaking) {
+                                        clearInterval(checkSpeaking);
+                                        stopLipSync();
+                                        resolve();
+                                    }
+                                }, 250);
+                                
+                                setTimeout(() => {
+                                    clearInterval(checkSpeaking);
+                                    stopLipSync();
+                                    resolve();
+                                }, 30000);
+                            });
+                        }
+                        
+                        stopLipSync();
+                        testFace('neutral');
+                        
+                        // Konuşma bitti - D-ID's built-in 'lively' driver handles idle animations
+                        console.log('✅ Speech completed. Avatar in natural idle state.');
+                        return;
+                    } catch (photoError) {
+                        console.error('Photo mode error:', photoError);
+                        document.getElementById('status').innerHTML = '<span class="highlight" style="color: #ff4444;">❌ Photo mode error</span>';
+                    }
+                }
+                
+                const gptRes = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${key}`
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-4o-mini',
+                        messages: messagesForGPT,
+                        temperature: 0.7,
+                        max_tokens: 500,
+                        stream: true
+                    })
+                });
+                
+                const reader = gptRes.body.getReader();
+                const decoder = new TextDecoder();
+                
+                let fullResponse = '';
+                let currentSentence = '';
+                
+                let audioQueue = [];
+                let sentenceQueue = [];
+                let isPlaying = false;
+                let activeTTSCount = 0;
+                const MAX_PARALLEL_TTS = 2;
+                let streamDone = false;
+                let nextSentenceIndex = 0;
+                let nextPlayIndex = 0;
+                
+                shouldStopSpeaking = false;
+                
+                async function prepareTTS(sentence, index) {
+                    activeTTSCount++;
+                    try {
+                        let paddedSentence = '....... ' + sentence;
+                        if (!/[.!?]$/.test(paddedSentence)) {
+                            paddedSentence += '.';
+                        }
+                        
+                        const ttsRes = await fetch('https://api.openai.com/v1/audio/speech', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${key}`
+                            },
+                            body: JSON.stringify({
+                                model: 'tts-1',
+                                voice: currentMode === 'kids' ? 'shimmer' : (photoMode && detectedGender === 'male' ? 'onyx' : 'nova'),
+                                input: paddedSentence,
+                                speed: 1.1
+                            })
+                        });
+                        
+                        const audioBlob = await ttsRes.blob();
+                        const audio = new Audio();
+                        audio.preload = 'auto';
+                        audio.sentenceText = sentence;
+                        audio.sentenceIndex = index;
+                        
+                        const url = URL.createObjectURL(audioBlob);
+                        audio.src = url;
+                        
+                        await new Promise((resolve, reject) => {
+                            audio.oncanplaythrough = resolve;
+                            audio.onerror = reject;
+                            audio.load();
+                            setTimeout(resolve, 3500);
+                        });
+                        
+                        activeTTSCount--;
+                        return audio;
+                    } catch (e) {
+                        activeTTSCount--;
+                        return null;
+                    }
+                }
+                
+                async function processTTSQueue() {
+                    while ((!streamDone || sentenceQueue.length > 0) && !shouldStopSpeaking) {
+                        while (sentenceQueue.length > 0 && activeTTSCount < MAX_PARALLEL_TTS && !shouldStopSpeaking) {
+                            const {sentence, index} = sentenceQueue.shift();
+                            prepareTTS(sentence, index).then(audio => {
+                                if (audio && !shouldStopSpeaking) {
+                                    let inserted = false;
+                                    for (let i = 0; i < audioQueue.length; i++) {
+                                        if (audioQueue[i].sentenceIndex > audio.sentenceIndex) {
+                                            audioQueue.splice(i, 0, audio);
+                                            inserted = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!inserted) {
+                                        audioQueue.push(audio);
+                                    }
+                                    playNextAudio();
+                                }
+                            });
+                        }
+                        await new Promise(r => setTimeout(r, 20));
+                    }
+                }
+                
+                function playNextAudio() {
+                    if (shouldStopSpeaking) {
+                        audioQueue = [];
+                        sentenceQueue = [];
+                        isPlaying = false;
+                        return;
+                    }
+                    
+                    if (isPlaying || audioQueue.length === 0) return;
+                    
+                    if (audioQueue[0].sentenceIndex !== nextPlayIndex) {
+                        setTimeout(playNextAudio, 70);
+                        return;
+                    }
+                    
+                    isPlaying = true;
+                    const audio = audioQueue.shift();
+                    nextPlayIndex++;
+                    currentAudio = audio;
+                    
+                    audio.onplay = () => {
+                        if (shouldStopSpeaking) { audio.pause(); return; }
+                        startLipSync(audio.sentenceText);
+                        const sentenceEmotionResult = detectEmotion(audio.sentenceText);
+                        updateEmotion(sentenceEmotionResult);
+                    };
+                    
+                    audio.onended = () => {
+                                                
+                        stopLipSync();
+                        isPlaying = false;
+                        currentAudio = null;
+                        
+                        if (!shouldStopSpeaking) {
+                            playNextAudio();
+                        }
+                    };
+                    
+                    audio.onerror = () => {
+                        stopLipSync();
+                        isPlaying = false;
+                        currentAudio = null;
+                        if (!shouldStopSpeaking) {
+                            playNextAudio();
+                        }
+                    };
+                    
+                    const startPlayback = () => {
+                        if (shouldStopSpeaking) { isPlaying = false; return; }
+                        setTimeout(() => {
+                            if (shouldStopSpeaking) { isPlaying = false; return; }
+                            audio.play().catch(() => {
+                                isPlaying = false;
+                                currentAudio = null;
+                                if (!shouldStopSpeaking) playNextAudio();
+                            });
+                        }, 100);
+                    };
+                    
+                    if (audio.readyState >= 4) {
+                        startPlayback();
+                    } else {
+                        audio.oncanplaythrough = startPlayback;
+                        audio.load();
+                    }
+                }
+                
+                function checkSentenceComplete(text) {
+                    return /[.!?](\s|$)/.test(text);
+                }
+                
+                function cleanTextForTTS(text) {
+                    return text
+                        .replace(/\*\*/g, '')
+                        .replace(/\*/g, '')
+                        .replace(/_/g, '')
+                        .replace(/`/g, '')
+                        .replace(/\[.*?\]/g, '')
+                        .replace(/https?:\/\/\S+/g, '')
+                        .replace(/[#@]/g, '')
+                        .replace(/\s+/g, ' ')
+                        .trim();
+                }
+                
+                let isFirstSentence = true;
+                let pendingShortSentence = '';
+                const MIN_SENTENCE_LENGTH = 30;
+                
+                processTTSQueue();
+                
+                testFace('confident');
+                emotionConfidence = 2;
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6).trim();
+                            if (data === '[DONE]') continue;
+                            
+                            try {
+                                const json = JSON.parse(data);
+                                const content = json.choices[0]?.delta?.content || '';
+                                
+                                if (content) {
+                                    fullResponse += content;
+                                    currentSentence += content;
+                                    
+                                    document.getElementById('status').innerHTML = `<span class="highlight">NEXUS:</span> ${fullResponse}<span style="opacity:0.5">|</span>`;
+                                    
+                                    const hasFullStop = /[.!?](\s|$)/.test(currentSentence);
+                                    
+                                    if (isFirstSentence && hasFullStop && currentSentence.trim().length > 12) {
+                                        const cleanedSentence = cleanTextForTTS(currentSentence.trim());
+                                        if (cleanedSentence.length > 10) {
+                                            sentenceQueue.push({
+                                                sentence: cleanedSentence,
+                                                index: nextSentenceIndex++
+                                            });
+                                            isFirstSentence = false;
+                                            currentSentence = '';
+                                        }
+                                    }
+                                    else if (!isFirstSentence && hasFullStop && currentSentence.trim().length > 10) {
+                                        let sentenceToAdd = currentSentence.trim();
+                                        const cleanedSentence = cleanTextForTTS(sentenceToAdd);
+                                        
+                                        if (cleanedSentence.length > 5) {
+                                            if (pendingShortSentence) {
+                                                sentenceToAdd = pendingShortSentence + ' ' + cleanedSentence;
+                                                pendingShortSentence = '';
+                                            } else {
+                                                sentenceToAdd = cleanedSentence;
+                                            }
+                                            
+                                            if (sentenceToAdd.length < MIN_SENTENCE_LENGTH) {
+                                                pendingShortSentence = sentenceToAdd;
+                                            } else {
+                                                sentenceQueue.push({
+                                                    sentence: sentenceToAdd,
+                                                    index: nextSentenceIndex++
+                                                });
+                                            }
+                                        }
+                                        currentSentence = '';
+                                    }
+                                }
+                            } catch (e) {}
+                        }
+                    }
+                }
+                
+                let finalSentence = currentSentence.trim();
+                if (pendingShortSentence) {
+                    finalSentence = pendingShortSentence + ' ' + finalSentence;
+                }
+                if (finalSentence.length > 0) {
+                    const cleanedFinal = cleanTextForTTS(finalSentence);
+                    if (cleanedFinal.length > 5) {
+                        sentenceQueue.push({
+                            sentence: cleanedFinal,
+                            index: nextSentenceIndex++
+                        });
+                    }
+                }
+                
+                streamDone = true;
+                
+                const responseEmotion = detectEmotion(fullResponse);
+                addToHistory('assistant', fullResponse, responseEmotion);
+                document.getElementById('status').innerHTML = `<span class="highlight">NEXUS:</span> "${fullResponse}"`;
+                
+                const checkDone = setInterval(() => {
+                    if (shouldStopSpeaking || (!isPlaying && audioQueue.length === 0 && sentenceQueue.length === 0 && activeTTSCount === 0)) {
+                        clearInterval(checkDone);
+                        stopLipSync();
+                        
+                        // Konuşma tamamen bitti - natural idle state
+                        console.log('✅ All speech completed. Avatar in natural idle state.');
+                    }
+                }, 300);
+                
+            } catch (error) {
+                document.getElementById('status').innerHTML = `<span class="highlight" style="color: #ff4444;">❌ ERROR:</span> ${error.message}`;
+                testFace('sad');
+                console.error('Process Audio Error:', error);
+            }
+        }
+        
+        // INIT
+        window.addEventListener('DOMContentLoaded', createParticles);
+        
+        console.log('✅ NEXUS AI initialized successfully!');
+    </script>
+</body>
+</html>
